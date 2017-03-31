@@ -39,7 +39,7 @@ public class ThemeSelectActivity extends AppCompatActivity {
 
                 Intent intent = new Intent(ThemeSelectActivity.this, SeletedThemeActivity.class);
                 intent.putExtra("themeTitle",themeTitle);
-                Log.e("#########넘기는값",themeTitle + "");
+//                Log.e("#########넘기는값",themeTitle + "");
                 startActivity(intent);
             }
         });

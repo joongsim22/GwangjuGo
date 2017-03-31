@@ -15,6 +15,6 @@ public class SeletedThemeActivity extends AppCompatActivity {
         Intent intent = getIntent();
         String themeTitle = intent.getExtras().getString("themeTitle");
         setTitle(themeTitle);
-        Log.e("######넘어오는값",themeTitle + "");
+//        Log.e("######넘어오는값",themeTitle + "");
     }
 }
