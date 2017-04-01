@@ -3,6 +3,7 @@ package gwangju.com;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
@@ -16,8 +17,8 @@ public class MainActivity extends AppCompatActivity {
         // 메인버튼 4개. 클릭 시 각각 안내페이지로
         Button themeBtn = (Button) findViewById(R.id.mainBtn1);
         Button zoneBtn = (Button) findViewById(R.id.mainBtn2);
-        Button busBtn = (Button) findViewById(R.id.mainBtn3);
-        Button boardBtn = (Button) findViewById(R.id.mainBtn4);
+        Button roomsBtn = (Button) findViewById(R.id.mainBtn3);
+        Button mapBtn = (Button) findViewById(R.id.mainBtn4);
 
         themeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -35,18 +36,19 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        busBtn.setOnClickListener(new View.OnClickListener() {
+        roomsBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, BusSelectActivity.class);
+                Intent intent = new Intent(MainActivity.this, RoomsSelectActivity.class);
+                Log.e("넘어간드아아아아아아아","숙소로 넘어간드아아아아아");
                 startActivity(intent);
             }
         });
 
-        boardBtn.setOnClickListener(new View.OnClickListener() {
+        mapBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, BoardActivity.class);
+                Intent intent = new Intent(MainActivity.this, MapActivity.class);
                 startActivity(intent);
             }
         });
