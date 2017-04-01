@@ -1,6 +1,7 @@
 package gwangju.com;
 
 import android.content.Intent;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -9,9 +10,12 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import gwangju.com.adapter.ThemeListViewAdapter;
+import gwangju.com.adapter.ThemeViewPagerAdapter;
 import gwangju.com.list.ThemeListViewItem;
 
 public class ThemeSelectActivity extends AppCompatActivity {
+
+    ViewPager themePager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,6 +23,7 @@ public class ThemeSelectActivity extends AppCompatActivity {
         setContentView(R.layout.activity_theme_select);
         setTitle("테마관광");
 
+        // 리스트뷰
         ListView themeList;
         ThemeListViewAdapter adapter = new ThemeListViewAdapter();
 
@@ -45,5 +50,11 @@ public class ThemeSelectActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        // 사진 뷰페이저
+        int imgCnt = 2;
+        themePager = (ViewPager)findViewById(R.id.themePager);
+        ThemeViewPagerAdapter themeAdapter = new ThemeViewPagerAdapter(getLayoutInflater(), imgCnt);
+        themePager.setAdapter(themeAdapter);
     }
 }
