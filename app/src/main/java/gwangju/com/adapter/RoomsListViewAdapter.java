@@ -10,23 +10,24 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import gwangju.com.R;
+import gwangju.com.list.JavaRoomsDto;
 import gwangju.com.list.RoomsListViewItem;
 
 public class RoomsListViewAdapter extends BaseAdapter {
-
+    ArrayList<JavaRoomsDto> list = new ArrayList<JavaRoomsDto>();
     //adapter에 추가된 데이터들 저장.
-    private ArrayList<RoomsListViewItem> listViewItemList = new ArrayList<RoomsListViewItem>();
+//    private ArrayList<RoomsListViewItem> listViewItemList = new ArrayList<RoomsListViewItem>();
 
     // 리스트뷰아이템 개수
     @Override
     public int getCount() {
-        return listViewItemList.size();
+        return list.size();
     }
 
     //해당 position 에 있는 데이터 가져오기
     @Override
     public Object getItem(int position) {
-        return listViewItemList.get(position);
+        return list.get(position);
     }
 
     @Override
@@ -51,24 +52,21 @@ public class RoomsListViewAdapter extends BaseAdapter {
         TextView roomsTitleView = (TextView) convertView.findViewById(R.id.roomsTitle);
 
         // Data Set(listViewItemList)에서 position에 위치한 데이터 참조 획득
-        RoomsListViewItem listViewItem = listViewItemList.get(position);
+        JavaRoomsDto listViewItem = list.get(position);
 
         // 아이템 내 각 위젯에 데이터 반영
-        roomsClassificationView.setText(listViewItem.getRoomsClassification());
-        roomsTitleView.setText(listViewItem.getRoomsTitle());
+        roomsClassificationView.setText(listViewItem.getKind());
+        roomsTitleView.setText(listViewItem.getName());
 
         convertView.setTag(position);
 
         return convertView;
     }
 
-    public void addItem(String classification, String title) {
-        RoomsListViewItem item = new RoomsListViewItem();
-
-        item.setRoomsClassification(classification);
-        item.setRoomsTitle(title);
-
-        listViewItemList.add(item);
+    public void addItem(String kind, String name) {
+        JavaRoomsDto dto = new JavaRoomsDto();
+        dto.setKind(kind);
+        dto.setName(name);
+         list.add(dto);
     }
-
 }

@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import gwangju.com.list.JavaRoomsDto;
+
 public class SeletedRoomsActivity extends AppCompatActivity {
 
     @Override
@@ -12,7 +14,7 @@ public class SeletedRoomsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_seleted_rooms);
 
         Intent intent = getIntent();
-        String roomsTitle = intent.getExtras().getString("roomsTitle");
-        setTitle(roomsTitle);
+        JavaRoomsDto item = (JavaRoomsDto) intent.getSerializableExtra("item");
+        setTitle(item.getName());
     }
 }
