@@ -28,6 +28,7 @@ public class ThemeSelectActivity extends AppCompatActivity {
         adapter.addItem("5.18", "5.18 관련 유적들을 소개합니다.");
         adapter.addItem("문화예술", "박물관, 공연 등 행사장을 소개합니다.");
         adapter.addItem("축제", "축제 관련 일정을 소개합니다.");
+        adapter.addItem("축제", "축제 관련 일정을 소개합니다.");
 
         themeList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
