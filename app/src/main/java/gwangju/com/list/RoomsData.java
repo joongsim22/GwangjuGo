@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by user on 2017-04-01.
+ * Created by user on 2017-04-01. 이거 안 날려먹고 싶당
  */
 
 public class RoomsData {
