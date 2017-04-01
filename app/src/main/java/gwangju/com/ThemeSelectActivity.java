@@ -30,6 +30,7 @@ public class ThemeSelectActivity extends AppCompatActivity {
         adapter.addItem("축제", "축제 관련 일정을 소개합니다.");
         adapter.addItem("축제", "축제 관련 일정을 소개합니다.");
 
+
         themeList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView parent, View v, int position, long id) {
