@@ -25,10 +25,10 @@ public class ThemeSelectActivity extends AppCompatActivity {
         themeList = (ListView)findViewById(R.id.themeListView);
         themeList.setAdapter(adapter);
 
-        adapter.addItem("5.18", "5.18 관련 유적들을 소개합니다.");
-        adapter.addItem("문화예술", "박물관, 공연 등 행사장을 소개합니다.");
-        adapter.addItem("축제", "축제 관련 일정을 소개합니다.");
-        adapter.addItem("축제", "축제 관련 일정을 소개합니다.");
+        adapter.addItem("버스", "버스노선을 따라 광주를 여행하세요.");
+        adapter.addItem("문화예술", "박물관 등 각종 시설을 알려드립니다.");
+        adapter.addItem("역사", "광주의 역사를 두 발로 걸어보세요.");
+        adapter.addItem("자연", "광주의 푸르른 자연을 느껴보세요.");
 
         themeList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
