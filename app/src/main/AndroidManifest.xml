@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="gwangju.com">
+
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.CALL_PHONE"/>
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -22,7 +24,9 @@
         <activity android:name=".RoomsSelectActivity" />
         <activity android:name=".MapActivity" />
         <activity android:name=".SeletedThemeActivity" />
-        <activity android:name=".SeletedRoomsActivity"></activity>
+        <activity android:name=".SeletedRoomsActivity" />
+        <activity android:name=".CalendarActivity" />
+        <activity android:name=".IntroduceGwangjuActivity"></activity>
     </application>
 
 </manifest>

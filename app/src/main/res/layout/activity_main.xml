@@ -34,7 +34,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="메뉴1" />
+                android:text="테마별 관광지" />
 
             <Button
                 android:id="@+id/mainBtn2"
@@ -42,7 +42,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="메뉴2" />
+                android:text="관공서 추천 관광지" />
         </LinearLayout>
 
         <LinearLayout
@@ -57,7 +57,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="메뉴3" />
+                android:text="숙소 정보" />
 
             <Button
                 android:id="@+id/mainBtn4"
@@ -65,12 +65,27 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="메뉴4" />
+                android:text="지도로 보기" />
         </LinearLayout>
     </LinearLayout>
 
-    <TextView
+    <LinearLayout
+        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1" />
+        android:layout_weight="1"
+        android:gravity="center">
+        <Button
+            android:id="@+id/calendar"
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="축제 달력"/>
+        <Button
+            android:id="@+id/introduce"
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="광주 소개"/>
+    </LinearLayout>
 </LinearLayout>

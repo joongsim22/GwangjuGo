@@ -4,6 +4,11 @@ public class ThemeListViewItem {
     private String themeTitle;
     private String themeExplain;
 
+    public ThemeListViewItem(String themeTitle, String themeExplain) {
+        this.themeTitle = themeTitle;
+        this.themeExplain = themeExplain;
+    }
+
     public String getThemeTitle() {
         return themeTitle;
     }

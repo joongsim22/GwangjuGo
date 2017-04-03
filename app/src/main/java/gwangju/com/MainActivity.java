@@ -52,5 +52,25 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        // 달력 보기
+        Button calBtn = (Button)findViewById(R.id.calendar);
+        calBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, CalendarActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        // 광주 소개하기
+        Button introduceBtn = (Button)findViewById(R.id.introduce);
+        introduceBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, IntroduceGwangjuActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 }
