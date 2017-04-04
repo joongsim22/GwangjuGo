@@ -1,4 +1,4 @@
-package gwangju.com.list;
+package gwangju.com.item;
 
 public class RoomsListViewItem {
     private String roomsClassification;

@@ -4,7 +4,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-import gwangju.com.list.JavaRoomsDto;
+import gwangju.com.data.JavaRoomsDto;
 
 public class SeletedRoomsActivity extends AppCompatActivity {
 

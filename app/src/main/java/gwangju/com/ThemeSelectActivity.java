@@ -4,18 +4,14 @@ import android.content.Intent;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ExpandableListView;
-import android.widget.ListView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
 import gwangju.com.adapter.ThemeListViewAdapter;
 import gwangju.com.adapter.ThemeViewPagerAdapter;
-import gwangju.com.list.ThemeListViewItem;
+import gwangju.com.item.ThemeListViewItem;
 
 public class ThemeSelectActivity extends AppCompatActivity {
 

@@ -12,11 +12,8 @@ import android.widget.ListView;
 import java.util.List;
 
 import gwangju.com.adapter.RoomsListViewAdapter;
-import gwangju.com.adapter.ThemeListViewAdapter;
-import gwangju.com.list.JavaRoomsDto;
-import gwangju.com.list.RoomsData;
-import gwangju.com.list.RoomsListViewItem;
-import gwangju.com.list.ThemeListViewItem;
+import gwangju.com.data.JavaRoomsDto;
+import gwangju.com.data.RoomsData;
 
 public class RoomsSelectActivity extends AppCompatActivity {
     List<JavaRoomsDto> list;

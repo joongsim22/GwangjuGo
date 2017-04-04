@@ -1,4 +1,4 @@
-package gwangju.com.list;
+package gwangju.com.item;
 
 public class ThemeListViewItem {
     private String themeTitle;

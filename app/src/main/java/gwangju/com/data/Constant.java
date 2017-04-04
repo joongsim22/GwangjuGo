@@ -1,4 +1,4 @@
-package gwangju.com.list;
+package gwangju.com.data;
 
 /**
  * Created by user on 2017-04-01.

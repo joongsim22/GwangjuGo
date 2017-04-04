@@ -1,7 +1,6 @@
 package gwangju.com.adapter;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +11,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import gwangju.com.R;
-import gwangju.com.list.ThemeListViewItem;
+import gwangju.com.item.ThemeListViewItem;
 
 public class ThemeListViewAdapter extends BaseExpandableListAdapter {
 

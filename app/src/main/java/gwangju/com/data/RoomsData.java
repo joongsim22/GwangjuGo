@@ -1,4 +1,4 @@
-package gwangju.com.list;
+package gwangju.com.data;
 
 import android.util.Log;
 
