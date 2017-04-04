@@ -63,10 +63,26 @@ public class RoomsListViewAdapter extends BaseAdapter {
         return convertView;
     }
 
-    public void addItem(String kind, String name) {
+    public void addItem(String kind, String name,String lat, String lng,String location, String phoneNum, String feeMax, String feeMin) {
         JavaRoomsDto dto = new JavaRoomsDto();
+
         dto.setKind(kind);
         dto.setName(name);
+        dto.setLat(lat);
+        dto.setLng(lng);
+        dto.setLocation(location);
+        dto.setPhoneNum(phoneNum);
+        dto.setFeeMax(Integer.parseInt(feeMax));
+        dto.setFeeMin(Integer.parseInt(feeMin));
+
+         list.add(dto);
+    }
+    public void addItem_title(String kind, String name) {
+        JavaRoomsDto dto = new JavaRoomsDto();
+
+        dto.setKind(kind);
+        dto.setName(name);
+
          list.add(dto);
     }
 }

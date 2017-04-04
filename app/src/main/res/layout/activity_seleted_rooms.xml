@@ -9,5 +9,11 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="gwangju.com.SeletedRoomsActivity">
-
+    <Button
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="go to the map"
+    android:id="@+id/mapbtn"
+    android:layout_centerVertical="true"
+    android:layout_centerHorizontal="true" />
 </RelativeLayout>

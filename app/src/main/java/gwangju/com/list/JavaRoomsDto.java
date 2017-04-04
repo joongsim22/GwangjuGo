@@ -14,6 +14,10 @@ public class JavaRoomsDto implements Serializable {
     String phoneNum;
     int feeMin;
     int feeMax;
+    String lat;
+    String lng;
+
+
 
     public int getNum() {
         return num;
@@ -57,12 +61,24 @@ public class JavaRoomsDto implements Serializable {
     public void setFeeMax(int feeMax) {
         this.feeMax = feeMax;
     }
+    public String getLat() {
+        return lat;
+    }
+    public void setLat(String lat) {
+        this.lat = lat;
+    }
+    public String getLng() {
+        return lng;
+    }
+    public void setLng(String lng) {
+        this.lng = lng;
+    }
 
 
     @Override
     public String toString() {
         return "ItemVO [name=" + name +", location=" + location +", kind=" + kind
-                + ", phoneNum=" + phoneNum + ", feeMin=" + feeMin +", feeMax=" + feeMax + "]";
+                + ", phoneNum=" + phoneNum + ", feeMin=" + feeMin +", feeMax=" + feeMax +", lat=" + lat +", lng=" + lng + "]";
     }
 
 }
