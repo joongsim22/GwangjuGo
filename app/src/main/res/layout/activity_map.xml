@@ -10,8 +10,25 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="gwangju.com.MapActivity">
 
+    <RelativeLayout
+        android:id="@+id/map_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text=""/>
+        android:id="@+id/lat"
+        android:layout_width="50dp"
+        android:layout_height="20dp"
+        android:text="lat"/>
+    <TextView
+        android:id="@+id/lng"
+        android:layout_width="100dp"
+        android:layout_height="20dp"
+        android:text="lng"
+        android:paddingLeft="50dp"
+        android:layout_alignBottom="@id/lat" />
+
+
+
 </RelativeLayout>

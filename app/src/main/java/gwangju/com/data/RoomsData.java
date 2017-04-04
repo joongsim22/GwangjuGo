@@ -30,12 +30,13 @@ public class RoomsData {
                 JSONObject obj2 = obj.getJSONObject(i);
                 String location= obj2.getString("location");
                 int num = obj2.getInt("num");
-                Log.e("dd",num+"");
                 String name= obj2.getString("name");
                 int feeMin= obj2.getInt("feeMin");
                 int feeMax= obj2.getInt("feeMax");
                 String kind= obj2.getString("kind");
                 String phoneNum= obj2.getString("phoneNum");
+                String lat = obj2.getString("lat");
+                String lng = obj2.getString("lng");
 
                 JavaRoomsDto dto = new JavaRoomsDto();
                 dto.setNum(num);
@@ -45,6 +46,8 @@ public class RoomsData {
                 dto.setPhoneNum(phoneNum);
                 dto.setFeeMin(feeMin);
                 dto.setFeeMax(feeMax);
+                dto.setLat(lat);
+                dto.setLng(lng);
 
                 list.add(dto);
 

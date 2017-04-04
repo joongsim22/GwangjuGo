@@ -23,6 +23,7 @@ public class RoomsSelectActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rooms_select);
         setTitle("숙소정보");
+
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
 
@@ -34,10 +35,11 @@ public class RoomsSelectActivity extends AppCompatActivity {
         RoomsData room = new RoomsData();
         list = room.getAllinfo();
 
-        adapter.addItem("호텔", "숙소1");
+        adapter.addItem_title("종류", "숙소이름");
         for(int i =0; i< list.size(); i++){
-            adapter.addItem( list.get(i).getKind(), list.get(i).getName());
-            Log.e("DD",list.get(0).getKind());
+            adapter.addItem( list.get(i).getKind(), list.get(i).getName(),
+                    list.get(i).getLat(),list.get(i).getLng(), list.get(i).getLocation(),
+                    list.get(i).getPhoneNum(), list.get(i).getFeeMax()+"",list.get(i).getFeeMin()+"");
 
         }
 
@@ -48,10 +50,10 @@ public class RoomsSelectActivity extends AppCompatActivity {
                 JavaRoomsDto item = (JavaRoomsDto) parent.getItemAtPosition(position);
 
                 String roomsName = item.getName();
+                String lat =item.getLat();
 
                 Intent intent = new Intent(RoomsSelectActivity.this, SeletedRoomsActivity.class);
                 intent.putExtra("item",item);
-//                Log.e("#########넘기는값",themeTitle + "");
                 startActivity(intent);
             }
         });
