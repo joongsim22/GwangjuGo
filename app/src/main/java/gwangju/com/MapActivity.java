@@ -4,13 +4,12 @@ import android.content.Intent;
 import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import net.daum.mf.map.api.MapView;
 
-import gwangju.com.list.JavaRoomsDto;
+import gwangju.com.data.JavaRoomsDto;
 
 public class MapActivity extends AppCompatActivity {
     JavaRoomsDto item;

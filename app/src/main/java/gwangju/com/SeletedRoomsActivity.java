@@ -4,15 +4,10 @@ import android.content.Intent;
 import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
-import java.util.List;
-import java.util.Map;
-
-import gwangju.com.list.JavaRoomsDto;
-import gwangju.com.list.RoomsData;
+import gwangju.com.data.JavaRoomsDto;
 
 public class SeletedRoomsActivity extends AppCompatActivity {
     JavaRoomsDto item;
@@ -24,7 +19,7 @@ public class SeletedRoomsActivity extends AppCompatActivity {
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
 
-        Button btn = (Button)findViewById(R.id.mapbtn);
+        Button btn = (Button)findViewById(R.id.map_btn);
         Intent intent = getIntent();
         item= (JavaRoomsDto) intent.getSerializableExtra("item");
         setTitle(item.getName());
