@@ -48,9 +48,6 @@ public class RoomsSelectActivity extends AppCompatActivity {
 
                 JavaRoomsDto item = (JavaRoomsDto) parent.getItemAtPosition(position);
 
-                String roomsName = item.getName();
-                String lat =item.getLat();
-
                 Intent intent = new Intent(RoomsSelectActivity.this, SeletedRoomsActivity.class);
                 intent.putExtra("item",item);
                 startActivity(intent);

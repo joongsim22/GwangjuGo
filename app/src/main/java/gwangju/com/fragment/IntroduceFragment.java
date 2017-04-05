@@ -1,11 +1,14 @@
 package gwangju.com.fragment;
 
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import gwangju.com.R;
@@ -39,6 +42,25 @@ public class IntroduceFragment extends Fragment {
         address.setText(getArguments().getString("address"));
         call.setText(getArguments().getString("call"));
         introduce.setText(getArguments().getString("introduce"));
+
+        Button mapGo = (Button) view.findViewById(R.id.map_go);
+        mapGo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+
+        // 전화번호 띄우기
+        Button callGo = (Button) view.findViewById(R.id.call_go);
+        callGo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Intent.ACTION_DIAL);
+                intent.setData(Uri.parse("tel:010-6802-7141"));
+                startActivity(intent);
+            }
+        });
 
         return view;
     }

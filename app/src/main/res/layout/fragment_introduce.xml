@@ -5,6 +5,9 @@
     tools:context="gwangju.com.fragment.IntroduceFragment">
 
     <ScrollView
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -14,6 +17,7 @@
             android:orientation="vertical">
 
             <LinearLayout
+                android:layout_marginBottom="5dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
@@ -22,11 +26,14 @@
                     android:layout_height="match_parent"
                     android:text="시간"/>
                 <TextView
+                    android:layout_marginLeft="15dp"
                     android:id="@+id/time_text"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"/>
             </LinearLayout>
             <LinearLayout
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
@@ -35,37 +42,60 @@
                     android:layout_height="match_parent"
                     android:text="요금"/>
                 <TextView
+                    android:layout_marginLeft="15dp"
                     android:id="@+id/fee_text"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"/>
             </LinearLayout>
-            <LinearLayout
+            <RelativeLayout
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:layout_height="wrap_content">
                 <TextView
+                    android:id="@+id/address_left_line"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:text="주소"/>
                 <TextView
+                    android:layout_toRightOf="@id/address_left_line"
+                    android:layout_marginLeft="15dp"
                     android:id="@+id/address_text"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"/>
-            </LinearLayout>
-            <LinearLayout
+                <Button
+                    android:id="@+id/map_go"
+                    android:layout_alignParentRight="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="지도"/>
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:layout_height="wrap_content">
                 <TextView
+                    android:id="@+id/call_left_line"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:text="전화"/>
                 <TextView
+                    android:layout_toRightOf="@id/call_left_line"
                     android:id="@+id/call_text"
+                    android:layout_marginLeft="15dp"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"/>
-            </LinearLayout>
+                <Button
+                    android:layout_alignParentRight="true"
+                    android:id="@+id/call_go"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="통화"/>
+            </RelativeLayout>
             <TextView
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="소개"/>

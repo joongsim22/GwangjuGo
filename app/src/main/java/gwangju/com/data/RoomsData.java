@@ -1,7 +1,5 @@
 package gwangju.com.data;
 
-import android.util.Log;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -12,8 +10,6 @@ import java.util.List;
 /**
  * Created by user on 2017-04-01.
  *
- *
- * djdjdjdjdjdjddskjalkajfliewuliwuelkfㅁㅇ리ㅗㅁ맂ㄷ
  */
 
 public class RoomsData {
