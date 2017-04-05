@@ -26,7 +26,8 @@
         <activity android:name=".SeletedThemeActivity" />
         <activity android:name=".SeletedRoomsActivity" />
         <activity android:name=".CalendarActivity" />
-        <activity android:name=".IntroduceGwangjuActivity"></activity>
+        <activity android:name=".IntroduceGwangjuActivity" />
+        <activity android:name=".AddStarActivity"></activity>
     </application>
 
 </manifest>

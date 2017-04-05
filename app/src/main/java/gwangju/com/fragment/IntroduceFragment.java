@@ -21,27 +21,29 @@ public class IntroduceFragment extends Fragment {
         // Required empty public constructor
     }
 
-
+    // 프래그먼트 생성될 때 기능들 설정
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_introduce, null);
-        TextView time = (TextView)view.findViewById(R.id.time_text);
-        TextView fee = (TextView)view.findViewById(R.id.fee_text);
-        TextView address = (TextView)view.findViewById(R.id.address_text);
-        TextView call = (TextView)view.findViewById(R.id.call_text);
-        TextView introduce = (TextView)view.findViewById(R.id.introduce_text);
+
+        TextView time = (TextView) view.findViewById(R.id.time_text);
+        TextView fee = (TextView) view.findViewById(R.id.fee_text);
+        TextView address = (TextView) view.findViewById(R.id.address_text);
+        TextView call = (TextView) view.findViewById(R.id.call_text);
+        TextView introduce = (TextView) view.findViewById(R.id.introduce_text);
 
         time.setText(getArguments().getString("time"));
         fee.setText(getArguments().getString("fee"));
         address.setText(getArguments().getString("address"));
         call.setText(getArguments().getString("call"));
         introduce.setText(getArguments().getString("introduce"));
-//  return inflater.inflate(R.layout.fragment_introduce, container, false);
+
         return view;
     }
 
+    // 프래그먼트를 생성해서 액티비티에 뿌리는 메소드
     public static IntroduceFragment newInstance(DetailItem data) {
         Bundle args = new Bundle();
         args.putString("time", data.getTime());
