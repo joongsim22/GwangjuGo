@@ -13,10 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+
         </activity>
         <activity android:name=".ThemeSelectActivity" />
         <activity android:name=".ZoneSelectActivity" />
@@ -26,7 +23,13 @@
         <activity android:name=".SeletedRoomsActivity" />
         <activity android:name=".CalendarActivity" />
         <activity android:name=".IntroduceGwangjuActivity" />
-        <activity android:name=".AddStarActivity"></activity>
+        <activity android:name=".IntroActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>
