@@ -22,7 +22,6 @@ public class IntroActivity extends AppCompatActivity {
         ImageView logo = (ImageView)findViewById(R.id.logo);
 
         Glide.with(IntroActivity.this).load(R.drawable.introimg).asGif().diskCacheStrategy(DiskCacheStrategy.SOURCE).into(intro);
-        Glide.with(IntroActivity.this).load(R.drawable.city_logo).asGif().diskCacheStrategy(DiskCacheStrategy.SOURCE).into(logo);
 
         h = new Handler();
         h.postDelayed(mrun,3000);
