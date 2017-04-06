@@ -8,6 +8,7 @@ import android.util.Log;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import net.daum.android.map.MapViewEventListener;
 import net.daum.mf.map.api.CameraUpdateFactory;
 import net.daum.mf.map.api.MapPoint;
 import net.daum.mf.map.api.MapView;
@@ -41,7 +42,9 @@ public class MapActivity extends AppCompatActivity {
         //다음이 제공하는 MapView객체 생성 및 API Key 설정
         MapView mapView = new MapView(this);
         mapView.setDaumMapApiKey("162e50dd06bf165275d1555f498baf29");
-        mapView.moveCamera(CameraUpdateFactory.newMapPoint(MapPoint.mapPointWithGeoCoord(latD, lngD)));
+//        mapView.setOpenAPIKeyAuthenticationResultListener((MapView.OpenAPIKeyAuthenticationResultListener) this);
+//        mapView.setMapViewEventListener((MapViewEventListener) this);
+//        mapView.setPOIItemEventListener((MapView.POIItemEventListener) this);
 
         //xml에 선언된 map_view 레이아웃을 찾아온 후, 생성한 MapView객체 추가
         RelativeLayout container = (RelativeLayout) findViewById(R.id.map_view);
