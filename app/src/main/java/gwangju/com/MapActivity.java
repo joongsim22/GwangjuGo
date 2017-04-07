@@ -1,7 +1,11 @@
 package gwangju.com;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.StrictMode;
+import android.provider.Settings;
+import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -13,22 +17,19 @@ import net.daum.mf.map.api.MapPoint;
 import net.daum.mf.map.api.MapView;
 
 import java.util.List;
-import java.util.Map;
 
 import gwangju.com.data.GpsInfo;
 import gwangju.com.data.dao.RoomsData;
 import gwangju.com.data.dto.JavaRoomsDto;
 
-public class MapActivity extends AppCompatActivity implements MapView.OpenAPIKeyAuthenticationResultListener, MapView.MapViewEventListener,MapView.POIItemEventListener {
+public class MapActivity extends FragmentActivity implements MapView.OpenAPIKeyAuthenticationResultListener, MapView.MapViewEventListener,MapView.POIItemEventListener {
     JavaRoomsDto item;
     List<JavaRoomsDto> list;
-    Double latD;
-    Double lngD;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map);
-        Log.e("넘어옴", "맵뷰로");
+        Log.e("넘어옴", "숙소맵뷰로");
 
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
@@ -38,8 +39,8 @@ public class MapActivity extends AppCompatActivity implements MapView.OpenAPIKey
 
         Intent intent = getIntent();
         item = (JavaRoomsDto) intent.getSerializableExtra("item");
-        latD = Double.parseDouble(item.getLat());
-        lngD = Double.parseDouble(item.getLng());
+        Double latD = Double.parseDouble(item.getLat());
+        Double lngD = Double.parseDouble(item.getLng());
 
         setTitle(item.getName());
         lat.setText(latD + "");
@@ -51,8 +52,8 @@ public class MapActivity extends AppCompatActivity implements MapView.OpenAPIKey
 //        mapView.setOpenAPIKeyAuthenticationResultListener((MapView.OpenAPIKeyAuthenticationResultListener) this);
 //        mapView.setMapViewEventListener((MapViewEventListener) this);
 //        mapView.setPOIItemEventListener((MapView.POIItemEventListener) this);
-        mapView.setMapCenterPoint(MapPoint.mapPointWithGeoCoord(35.1610868,126.8774441
-        ), true);
+//        mapView.setMapCenterPoint(MapPoint.mapPointWithGeoCoord(35.1610868,126.8774441
+//        ), true);
         //xml에 선언된 map_view 레이아웃을 찾아온 후, 생성한 MapView객체 추가
         RelativeLayout container = (RelativeLayout) findViewById(R.id.map_view);
         container.addView(mapView);
@@ -66,24 +67,28 @@ public class MapActivity extends AppCompatActivity implements MapView.OpenAPIKey
 
     @Override
     public void onMapViewInitialized(final MapView mapView) {
+        GpsInfo gps =new GpsInfo(this);
+        final double lat = gps.getLatitude();
+        final double lng = gps.getLongitude();
 
-        mapView.setMapCenterPointAndZoomLevel(MapPoint.mapPointWithCONGCoord(latD,lngD), 3, false);
+
+        mapView.setMapCenterPointAndZoomLevel(MapPoint.mapPointWithCONGCoord(lat,lng), 3, false);
 
         new Thread(new Runnable() {
             @Override
             public void run() {
-                Intent intent = getIntent();
-                item = (JavaRoomsDto) intent.getSerializableExtra("item");
-                latD = Double.parseDouble(item.getLat());
-                lngD = Double.parseDouble(item.getLng());
-                      MapPOIItem marker = new MapPOIItem();
-                      marker.setItemName(item.getName());
-                      marker.setMapPoint(MapPoint.mapPointWithGeoCoord(latD,lngD));
-                      marker.setMarkerType(MapPOIItem.MarkerType.BluePin); // 기본으로 제공하는 BluePin 마커 모양.
-                      marker.setSelectedMarkerType(MapPOIItem.MarkerType.RedPin); // 마커를 클릭했을때, 기본으로 제공하는 RedPin 마커 모양.
+                RoomsData data = new RoomsData();
+                list= data.getRoomsGeocode(lat,lng);
+                    for(int i =0; i<list.size(); i++) {
+                        MapPOIItem marker = new MapPOIItem();
+                        marker.setTag(i);
+                        marker.setItemName("숙소");
+                        marker.setMapPoint(MapPoint.mapPointWithGeoCoord(Double.parseDouble(list.get(i).getLat()), Double.parseDouble(list.get(i).getLng())));
+                        marker.setMarkerType(MapPOIItem.MarkerType.BluePin); // 기본으로 제공하는 BluePin 마커 모양.
+                        marker.setSelectedMarkerType(MapPOIItem.MarkerType.RedPin); // 마커를 클릭했을때, 기본으로 제공하는 RedPin 마커 모양.
 
-                      mapView.addPOIItem(marker);
-
+                        mapView.addPOIItem(marker);
+                    }
             }
         });
     }
