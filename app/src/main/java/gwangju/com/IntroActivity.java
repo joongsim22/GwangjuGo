@@ -1,8 +1,8 @@
 package gwangju.com;
 
+import android.app.ActionBar;
 import android.content.Intent;
 import android.os.Handler;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ImageView;
@@ -17,7 +17,7 @@ public class IntroActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_intro);
 
-
+        ActionBar actionBar  =getActionBar();
         ImageView intro = (ImageView)findViewById(R.id.intro);
         ImageView logo = (ImageView)findViewById(R.id.logo);
 

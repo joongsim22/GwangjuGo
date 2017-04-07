@@ -11,263 +11,201 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
 import android.os.IBinder;
-import android.os.Message;
 import android.provider.Settings;
 import android.support.v4.content.ContextCompat;
-import android.util.Log;
-
-import java.util.Set;
-
-import gwangju.com.MainMapActivity;
 
 /**
  * Created by PC on 2017-04-07.
  */
 
-public class GpsInfo extends Service implements LocationListener{
+public class GpsInfo extends Service implements LocationListener {
     private final Context mContext;
 
-    // flag for GPS status
+    // 현재 GPS 사용유무
     boolean isGPSEnabled = false;
 
-    // flag for network status
+    // 네트워크 사용유무
     boolean isNetworkEnabled = false;
 
-    // flag for GPS status
-    boolean canGetLocation = false;
+    // GPS 상태값
+    boolean isGetLocation = false;
 
-    Location location; // location
-    double latitude; // latitude
-    double longitude; // longitude
+    Location location;
+    double lat; // 위도
+    double lon; // 경도
+    double distance; // Gps에서 지점까지 떨어져있는 거리.
 
-    // The minimum distance to change Updates in meters
-    private static final long MIN_DISTANCE_CHANGE_FOR_UPDATES = 10; // 10 meters
+    // 최소 GPS 정보 업데이트 거리 10미터
+    private static final long MIN_DISTANCE_CHANGE_FOR_UPDATES = 10;
 
-    // The minimum time between updates in milliseconds
-    private static final long MIN_TIME_BW_UPDATES = 1000 * 60 * 1; // 1 minute
+    // 최소 GPS 정보 업데이트 시간 밀리세컨이므로 1분
+    private static final long MIN_TIME_BW_UPDATES = 1000 * 60 * 1;
 
-    // Declaring a Location Manager
     protected LocationManager locationManager;
 
-    private Handler mHandler;
-
-    public GpsInfo(Context context, Handler handler) {
+    public GpsInfo(Context context){
         this.mContext = context;
-        this.mHandler = handler;
-        getLocation();
-    }
-    public void Update(){
-        getLocation();
-    }
-    public Location getLocation() {
 
-        if ( Build.VERSION.SDK_INT >= 23 &&
-                ContextCompat.checkSelfPermission( mContext, android.Manifest.permission.ACCESS_FINE_LOCATION ) != PackageManager.PERMISSION_GRANTED ) {
+    }
+
+    public Location getLocation() {
+        if (Build.VERSION.SDK_INT >= 23 &&
+                ContextCompat.checkSelfPermission(mContext, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             return null;
         }
-        try {
-            locationManager = (LocationManager) mContext
-                    .getSystemService(LOCATION_SERVICE);
+            try {
+                locationManager = (LocationManager) mContext
+                        .getSystemService(LOCATION_SERVICE);
 
-            // getting GPS status
-            isGPSEnabled = locationManager
-                    .isProviderEnabled(LocationManager.GPS_PROVIDER);
+                // GPS 정보 가져오기
+                isGPSEnabled = locationManager
+                        .isProviderEnabled(LocationManager.GPS_PROVIDER);
 
-            // getting network status
-            isNetworkEnabled = locationManager
-                    .isProviderEnabled(LocationManager.NETWORK_PROVIDER);
+                // 현재 네트워크 상태 값 알아오기
+                isNetworkEnabled = locationManager
+                        .isProviderEnabled(LocationManager.NETWORK_PROVIDER);
 
-            if (!isGPSEnabled && !isNetworkEnabled) {
-                // no network provider is enabled
-            } else {
-                this.canGetLocation = true;
-                // First get location from Network Provider
-                if (isNetworkEnabled) {
-                    locationManager.requestLocationUpdates(
-                            LocationManager.NETWORK_PROVIDER,
-                            MIN_TIME_BW_UPDATES,
-                            MIN_DISTANCE_CHANGE_FOR_UPDATES, this);
-                    Log.d("Network", "Network");
-                    if (locationManager != null) {
-                        location = locationManager
-                                .getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
-                        if (location != null) {
-                            latitude = location.getLatitude();
-                            longitude = location.getLongitude();
-                        }
-                    }
-                }
-                // if GPS Enabled get lat/long using GPS Services
-                if (isGPSEnabled) {
-                    if (location == null) {
+                if (!isGPSEnabled && !isNetworkEnabled) {
+                    // GPS 와 네트워크사용이 가능하지 않을때 소스 구현
+//            	Toast.makeText(getApplicationContext(), "GPS사용 설정을 확인해주세요", duration)
+
+
+                } else {
+                    this.isGetLocation = true;
+                    // 네트워크 정보로 부터 위치값 가져오기
+                    if (isNetworkEnabled) {
                         locationManager.requestLocationUpdates(
-                                LocationManager.GPS_PROVIDER,
+                                LocationManager.NETWORK_PROVIDER,
                                 MIN_TIME_BW_UPDATES,
                                 MIN_DISTANCE_CHANGE_FOR_UPDATES, this);
-                        Log.d("GPS Enabled", "GPS Enabled");
+
                         if (locationManager != null) {
                             location = locationManager
-                                    .getLastKnownLocation(LocationManager.GPS_PROVIDER);
+                                    .getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
                             if (location != null) {
-                                latitude = location.getLatitude();
-                                longitude = location.getLongitude();
+                                // 위도 경도 저장
+                                lat = location.getLatitude();
+                                lon = location.getLongitude();
+                            }
+                        }
+                    }
+
+                    if (isGPSEnabled) {
+                        if (location == null) {
+                            locationManager.requestLocationUpdates(
+                                    LocationManager.GPS_PROVIDER,
+                                    MIN_TIME_BW_UPDATES,
+                                    MIN_DISTANCE_CHANGE_FOR_UPDATES, this);
+                            if (locationManager != null) {
+                                location = locationManager
+                                        .getLastKnownLocation(LocationManager.GPS_PROVIDER);
+                                if (location != null) {
+                                    lat = location.getLatitude();
+                                    lon = location.getLongitude();
+                                }
                             }
                         }
                     }
                 }
-            }
 
-        } catch (Exception e) {
-            e.printStackTrace();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return location;
         }
 
-        return location;
-    }
 
     /**
-     * Stop using GPS listener
-     * Calling this function will stop using GPS in your app
+     * GPS 종료
      * */
     public void stopUsingGPS(){
-        if ( Build.VERSION.SDK_INT >= 23 &&
-                ContextCompat.checkSelfPermission( mContext, android.Manifest.permission.ACCESS_FINE_LOCATION ) != PackageManager.PERMISSION_GRANTED ) {
-            return;
-        }
         if(locationManager != null){
             locationManager.removeUpdates(GpsInfo.this);
+
         }
     }
 
     /**
-     * Function to get latitude
+     * 위도값을 가져옵니다.
      * */
     public double getLatitude(){
         if(location != null){
-            latitude = location.getLatitude();
+            lat = location.getLatitude();
         }
-
-        // return latitude
-        return latitude;
+        return lat;
     }
 
     /**
-     * Function to get longitude
+     * 경도값을 가져옵니다.
      * */
     public double getLongitude(){
         if(location != null){
-            longitude = location.getLongitude();
+            lon = location.getLongitude();
         }
-
-        // return longitude
-        return longitude;
+        return lon;
     }
 
     /**
-     * Function to check GPS/wifi enabled
-     * @return boolean
+     * GPS 나 wife 정보가 켜져있는지 확인합니다.
      * */
-    public boolean canGetLocation() {
-        return this.canGetLocation;
+    public boolean isGetLocation() {
+        return this.isGetLocation;
+
     }
 
     /**
-     * Function to show settings alert dialog
-     * On pressing Settings button will lauch Settings Options
+     * GPS 정보를 가져오지 못했을때
+     * 설정값으로 갈지 물어보는 alert 창
      * */
     public void showSettingsAlert(){
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(mContext);
 
-        // Setting Dialog Title
-        alertDialog.setTitle("GPS ok");
+        alertDialog.setTitle("GPS 사용유무셋팅");
+        alertDialog.setMessage("원하시는 마을로 가는 길을 찾기 위해서는 GPS가 켜져있어야 합니다." +
+                "\n 설정창으로 가시겠습니까?");
 
-        // Setting Dialog Message
-        alertDialog.setMessage("GPS is not enabled. Do you want to go to settings menu?");
 
-        // On pressing Settings button
-        alertDialog.setPositiveButton("Settings", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int which) {
-                Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-                mContext.startActivity(intent);
-            }
-        });
+        // OK 를 누르게 되면 설정창으로 이동합니다.
+        alertDialog.setPositiveButton("설정",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                        mContext.startActivity(intent);
+                    }
+                });
+        // Cancle 하면 종료 합니다.
+        alertDialog.setNegativeButton("취소",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
 
-        // on pressing cancel button
-        alertDialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.cancel();
-            }
-        });
-
-        // Showing Alert Message
         alertDialog.show();
+    }
+    @Override
+    public IBinder onBind(Intent intent) {
+        return null;
     }
 
     @Override
     public void onLocationChanged(Location location) {
-        if(location != null){
-            double latitude= location.getLatitude();
-            double longitude = location.getLongitude();
-            //Toast.makeText(mContext, "onLocationChanged is - \nLat: " + latitude + "\nLong: " + longitude, Toast.LENGTH_SHORT).show();
-            sendString("onLocationChanged is - \nLat: " + latitude + "\nLong: " + longitude + " provider:"+location.getProvider());
-        }
-    }
 
-    @Override
-    public void onProviderDisabled(String provider) {
-        //Toast.makeText(mContext, "onProviderDisabled " + provider, Toast.LENGTH_SHORT).show();
-        mHandler.sendEmptyMessage(MainMapActivity.RENEW_GPS);
-        sendString( "onProviderDisabled " + provider);
-    }
-
-    @Override
-    public void onProviderEnabled(String provider) {
-        //Toast.makeText(mContext, "onProviderEnabled " + provider, Toast.LENGTH_SHORT).show();
-        mHandler.sendEmptyMessage(MainMapActivity.RENEW_GPS);
-        sendString( "onProviderEnabled " + provider);
     }
 
     @Override
     public void onStatusChanged(String provider, int status, Bundle extras) {
-        //Toast.makeText(mContext, "onStatusChanged " + provider + " : " + status, Toast.LENGTH_SHORT).show();
-        mHandler.sendEmptyMessage(MainMapActivity.RENEW_GPS);
-        sendString("onStatusChanged " + provider + " : " + status + ":" + printBundle(extras));
+
     }
 
     @Override
-    public IBinder onBind(Intent arg0) {
-        return null;
+    public void onProviderEnabled(String provider) {
+
     }
 
-    private void sendString(String str){
-        Message msg = mHandler.obtainMessage();
-        msg.what = MainMapActivity.SEND_PRINT;
-        msg.obj = new String(str);
-        mHandler.sendMessage(msg);
+    @Override
+    public void onProviderDisabled(String provider) {
+
     }
-
-    public static String printBundle(Bundle extras) {
-        StringBuilder sb = new StringBuilder();
-        try {
-            sb.append("extras = " + extras);
-            sb.append("\n");
-            if (extras != null) {
-                Set keys = extras.keySet();
-                sb.append("++ bundle key count = " + keys.size());
-                sb.append("\n");
-
-                for (String _key : extras.keySet()) {
-                    sb.append("key=" + _key + " : " + extras.get(_key)+",");
-                }
-                sb.append("\n");
-            }
-        } catch (Exception e) {
-
-        } finally {
-
-        }
-        return sb.toString();
-    }
-
 }
