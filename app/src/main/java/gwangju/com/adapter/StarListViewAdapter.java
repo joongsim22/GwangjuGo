@@ -11,7 +11,6 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import gwangju.com.R;
-import gwangju.com.data.JavaRoomsDto;
 import gwangju.com.item.StarItem;
 
 public class StarListViewAdapter extends BaseAdapter {

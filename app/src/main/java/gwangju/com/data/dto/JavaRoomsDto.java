@@ -1,4 +1,4 @@
-package gwangju.com.data;
+package gwangju.com.data.dto;
 
 import java.io.Serializable;
 

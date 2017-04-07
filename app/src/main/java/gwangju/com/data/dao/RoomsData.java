@@ -1,4 +1,4 @@
-package gwangju.com.data;
+package gwangju.com.data.dao;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -6,6 +6,9 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import gwangju.com.data.Util;
+import gwangju.com.data.dto.JavaRoomsDto;
 
 /**
  * Created by user on 2017-04-01.

@@ -8,14 +8,11 @@ import android.util.Log;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import net.daum.android.map.MapViewEventListener;
-import net.daum.mf.map.api.CameraUpdateFactory;
-import net.daum.mf.map.api.MapPoint;
 import net.daum.mf.map.api.MapView;
 
-import gwangju.com.data.JavaRoomsDto;
+import gwangju.com.data.dto.JavaRoomsDto;
 
-public class MapActivity extends AppCompatActivity {
+public class MapActivity extends AppCompatActivity  {
     JavaRoomsDto item;
 
     @Override

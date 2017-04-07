@@ -8,7 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
-import gwangju.com.data.JavaRoomsDto;
+import gwangju.com.data.dto.JavaRoomsDto;
 
 public class SeletedRoomsActivity extends AppCompatActivity {
     JavaRoomsDto item;

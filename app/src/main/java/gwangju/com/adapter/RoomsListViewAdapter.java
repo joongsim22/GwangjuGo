@@ -10,7 +10,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import gwangju.com.R;
-import gwangju.com.data.JavaRoomsDto;
+import gwangju.com.data.dto.JavaRoomsDto;
 
 public class RoomsListViewAdapter extends BaseAdapter {
     ArrayList<JavaRoomsDto> list = new ArrayList<JavaRoomsDto>();
