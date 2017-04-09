@@ -3,38 +3,24 @@ package gwangju.com;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.os.Build;
-import android.os.Handler;
-import android.os.Message;
 import android.os.StrictMode;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import net.daum.mf.map.api.MapPOIItem;
 import net.daum.mf.map.api.MapPoint;
 import net.daum.mf.map.api.MapView;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
-import gwangju.com.data.GpsInfo;
-import gwangju.com.data.dto.JavaRoomsDto;
+import gwangju.com.item.RoomsXMLItem;
 
 public class MainMapActivity extends FragmentActivity implements MapView.OpenAPIKeyAuthenticationResultListener, MapView.MapViewEventListener,MapView.POIItemEventListener {
-    JavaRoomsDto item;
-    List<JavaRoomsDto> list;
+    RoomsXMLItem item;
+    List<RoomsXMLItem> list;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,11 +34,11 @@ public class MainMapActivity extends FragmentActivity implements MapView.OpenAPI
         TextView lng = (TextView) findViewById(R.id.lng);
 
         Intent intent = getIntent();
-        item = (JavaRoomsDto) intent.getSerializableExtra("item");
+        item = (RoomsXMLItem) intent.getSerializableExtra("item");
         Double latD = Double.parseDouble(item.getLat());
-        Double lngD = Double.parseDouble(item.getLng());
+        Double lngD = Double.parseDouble(item.getLon());
 
-        setTitle(item.getName());
+        setTitle(item.getTitle());
         lat.setText(latD + "");
         lng.setText(lngD + "");
 

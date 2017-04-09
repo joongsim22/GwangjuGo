@@ -10,10 +10,10 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import gwangju.com.R;
-import gwangju.com.data.dto.JavaRoomsDto;
+import gwangju.com.item.RoomsXMLItem;
 
 public class RoomsListViewAdapter extends BaseAdapter {
-    ArrayList<JavaRoomsDto> list = new ArrayList<JavaRoomsDto>();
+    ArrayList<RoomsXMLItem> list = new ArrayList<RoomsXMLItem>();
     //adapter에 추가된 데이터들 저장.
 //    private ArrayList<RoomsListViewItem> listViewItemList = new ArrayList<RoomsListViewItem>();
 
@@ -51,37 +51,26 @@ public class RoomsListViewAdapter extends BaseAdapter {
         TextView roomsTitleView = (TextView) convertView.findViewById(R.id.roomsTitle);
 
         // Data Set(listViewItemList)에서 position에 위치한 데이터 참조 획득
-        JavaRoomsDto listViewItem = list.get(position);
+        RoomsXMLItem listViewItem = list.get(position);
 
         // 아이템 내 각 위젯에 데이터 반영
-        roomsClassificationView.setText(listViewItem.getKind());
-        roomsTitleView.setText(listViewItem.getName());
+        roomsClassificationView.setText(listViewItem.getLodgName());
+        roomsTitleView.setText(listViewItem.getTitle());
 
         convertView.setTag(position);
 
         return convertView;
     }
 
-    public void addItem(String kind, String name,String lat, String lng,String location, String phoneNum, String feeMax, String feeMin) {
-        JavaRoomsDto dto = new JavaRoomsDto();
-
-        dto.setKind(kind);
-        dto.setName(name);
-        dto.setLat(lat);
-        dto.setLng(lng);
-        dto.setLocation(location);
-        dto.setPhoneNum(phoneNum);
-        dto.setFeeMax(Integer.parseInt(feeMax));
-        dto.setFeeMin(Integer.parseInt(feeMin));
-
-         list.add(dto);
+    public void addItem(RoomsXMLItem item) {
+        list.add(item);
     }
-    public void addItem_title(String kind, String name) {
-        JavaRoomsDto dto = new JavaRoomsDto();
 
-        dto.setKind(kind);
-        dto.setName(name);
+    public void addItem_title(String lodgName, String title) {
+        RoomsXMLItem item = new RoomsXMLItem();
 
-         list.add(dto);
+        item.setTitle(title);
+        item.setLodgName(lodgName);
+        list.add(item);
     }
 }

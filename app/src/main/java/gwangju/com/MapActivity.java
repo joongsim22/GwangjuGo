@@ -1,12 +1,8 @@
 package gwangju.com;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.StrictMode;
-import android.provider.Settings;
 import android.support.v4.app.FragmentActivity;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.RelativeLayout;
@@ -19,12 +15,11 @@ import net.daum.mf.map.api.MapView;
 import java.util.List;
 
 import gwangju.com.data.GpsInfo;
-import gwangju.com.data.dao.RoomsData;
-import gwangju.com.data.dto.JavaRoomsDto;
+import gwangju.com.item.RoomsXMLItem;
 
 public class MapActivity extends FragmentActivity implements MapView.OpenAPIKeyAuthenticationResultListener, MapView.MapViewEventListener,MapView.POIItemEventListener {
-    JavaRoomsDto item;
-    List<JavaRoomsDto> list;
+    RoomsXMLItem item;
+    List<RoomsXMLItem> list;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,11 +33,11 @@ public class MapActivity extends FragmentActivity implements MapView.OpenAPIKeyA
         TextView lng = (TextView) findViewById(R.id.lng);
 
         Intent intent = getIntent();
-        item = (JavaRoomsDto) intent.getSerializableExtra("item");
+        item = (RoomsXMLItem) intent.getSerializableExtra("item");
         Double latD = Double.parseDouble(item.getLat());
-        Double lngD = Double.parseDouble(item.getLng());
+        Double lngD = Double.parseDouble(item.getLon());
 
-        setTitle(item.getName());
+        setTitle(item.getTitle());
         lat.setText(latD + "");
         lng.setText(lngD + "");
 
@@ -77,13 +72,13 @@ public class MapActivity extends FragmentActivity implements MapView.OpenAPIKeyA
         new Thread(new Runnable() {
             @Override
             public void run() {
-                RoomsData data = new RoomsData();
-                list= data.getRoomsGeocode(lat,lng);
+                RoomsXML data = new RoomsXML();
+                list= data.getData();
                     for(int i =0; i<list.size(); i++) {
                         MapPOIItem marker = new MapPOIItem();
                         marker.setTag(i);
                         marker.setItemName("숙소");
-                        marker.setMapPoint(MapPoint.mapPointWithGeoCoord(Double.parseDouble(list.get(i).getLat()), Double.parseDouble(list.get(i).getLng())));
+                        marker.setMapPoint(MapPoint.mapPointWithGeoCoord(Double.parseDouble(list.get(i).getLat()), Double.parseDouble(list.get(i).getLon())));
                         marker.setMarkerType(MapPOIItem.MarkerType.BluePin); // 기본으로 제공하는 BluePin 마커 모양.
                         marker.setSelectedMarkerType(MapPOIItem.MarkerType.RedPin); // 마커를 클릭했을때, 기본으로 제공하는 RedPin 마커 모양.
 

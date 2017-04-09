@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import gwangju.com.data.Util;
-import gwangju.com.data.dto.JavaRoomsDto;
 import gwangju.com.data.dto.OmeGwangjuDto;
 import gwangju.com.data.dto.OmeGwangjuSubDto;
 

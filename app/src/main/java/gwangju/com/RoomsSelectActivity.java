@@ -8,15 +8,14 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-import java.util.List;
+import java.util.ArrayList;
 
 import gwangju.com.adapter.RoomsListViewAdapter;
-import gwangju.com.data.dto.JavaRoomsDto;
-import gwangju.com.data.dao.RoomsData;
+import gwangju.com.item.RoomsXMLItem;
 
 public class RoomsSelectActivity extends AppCompatActivity {
-    List<JavaRoomsDto> list;
-
+//    List<JavaRoomsDto> list;
+    ArrayList<RoomsXMLItem> list;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,22 +30,21 @@ public class RoomsSelectActivity extends AppCompatActivity {
 
         roomsList = (ListView)findViewById(R.id.roomsListView);
         roomsList.setAdapter(adapter);
-        RoomsData room = new RoomsData();
-        list = room.getAllinfo();
+//        RoomsData room = new RoomsData();
+//        list = room.getAllinfo();
+        RoomsXML item = new RoomsXML();
+        list = item.getData();
 
         adapter.addItem_title("종류", "숙소이름");
         for(int i =0; i< list.size(); i++){
-            adapter.addItem( list.get(i).getKind(), list.get(i).getName(),
-                    list.get(i).getLat(),list.get(i).getLng(), list.get(i).getLocation(),
-                    list.get(i).getPhoneNum(), list.get(i).getFeeMax()+"",list.get(i).getFeeMin()+"");
-
+            adapter.addItem(list.get(i));
         }
 
         roomsList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView parent, View v, int position, long id) {
 
-                JavaRoomsDto item = (JavaRoomsDto) parent.getItemAtPosition(position);
+                RoomsXMLItem item = (RoomsXMLItem) parent.getItemAtPosition(position);
 
                 Intent intent = new Intent(RoomsSelectActivity.this, SeletedRoomsActivity.class);
                 intent.putExtra("item",item);

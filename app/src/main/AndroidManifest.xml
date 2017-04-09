@@ -29,6 +29,7 @@
         <activity android:name=".CalendarActivity" />
         <activity android:name=".IntroduceGwangjuActivity" />
         <activity android:name=".MainMapActivity" />
+        <activity android:name=".AddStarActivity" />
     </application>
 
 </manifest>

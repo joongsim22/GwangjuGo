@@ -8,10 +8,10 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
-import gwangju.com.data.dto.JavaRoomsDto;
+import gwangju.com.item.RoomsXMLItem;
 
 public class SeletedRoomsActivity extends AppCompatActivity {
-    JavaRoomsDto item;
+    RoomsXMLItem item;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,9 +23,9 @@ public class SeletedRoomsActivity extends AppCompatActivity {
         Button btn = (Button)findViewById(R.id.map_btn);
 
         Intent intent = getIntent();
-        item= (JavaRoomsDto) intent.getSerializableExtra("item");
-        setTitle(item.getName());
-        btn.setText(item.getName());
+        item= (RoomsXMLItem) intent.getSerializableExtra("item");
+        setTitle(item.getTitle());
+        btn.setText(item.getTitle());
 
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
