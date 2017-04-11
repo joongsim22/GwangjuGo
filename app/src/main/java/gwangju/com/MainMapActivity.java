@@ -1,14 +1,21 @@
 package gwangju.com;
 
+import android.Manifest;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.StrictMode;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import net.daum.mf.map.api.MapPOIItem;
 import net.daum.mf.map.api.MapPoint;
@@ -16,13 +23,21 @@ import net.daum.mf.map.api.MapView;
 
 import java.util.List;
 
+import gwangju.com.data.GpsInfo;
 import gwangju.com.item.RoomsXMLItem;
 
 public class MainMapActivity extends FragmentActivity implements MapView.OpenAPIKeyAuthenticationResultListener, MapView.MapViewEventListener,MapView.POIItemEventListener {
     RoomsXMLItem item;
     List<RoomsXMLItem> list;
+    GpsInfo gps = null;
+    private static final int MY_PERMISSIONS_REQUEST_READ_CONTACTS = 1;
+    private static String[] PERMISSIONS_STORAGE = {
+            Manifest.permission.ACCESS_FINE_LOCATION,
+            Manifest.permission.INTERNET
+    };
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map);
         Log.e("넘어옴", "숙소맵뷰로");
@@ -33,28 +48,37 @@ public class MainMapActivity extends FragmentActivity implements MapView.OpenAPI
         TextView lat = (TextView) findViewById(R.id.lat);
         TextView lng = (TextView) findViewById(R.id.lng);
 
-        Intent intent = getIntent();
-        item = (RoomsXMLItem) intent.getSerializableExtra("item");
-        Double latD = Double.parseDouble(item.getLat());
-        Double lngD = Double.parseDouble(item.getLon());
 
-        setTitle(item.getTitle());
-        lat.setText(latD + "");
-        lng.setText(lngD + "");
 
-        chkGpsService();
-        //다음이 제공하는 MapView객체 생성 및 API Key 설정
-        final MapView mapView = new MapView(this);
-        mapView.setDaumMapApiKey("162e50dd06bf165275d1555f498baf29");
-//        mapView.setOpenAPIKeyAuthenticationResultListener((MapView.OpenAPIKeyAuthenticationResultListener) this);
-//        mapView.setMapViewEventListener((MapViewEventListener) this);
-//        mapView.setPOIItemEventListener((MapView.POIItemEventListener) this);
-//        mapView.setMapCenterPoint(MapPoint.mapPointWithGeoCoord(35.1610868,126.8774441
-//        ), true);
-        //xml에 선언된 map_view 레이아웃을 찾아온 후, 생성한 MapView객체 추가
-        RelativeLayout container = (RelativeLayout) findViewById(R.id.map_view);
-        container.addView(mapView);
-        Log.e("띄움", "맵뷰를");
+// 권한을 획득하기전에 현재 Acivity에서 지정된 권한을 사용할 수 있는지 여부 체크
+        if (ContextCompat.checkSelfPermission(MainMapActivity.this,
+                Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
+
+            // 권한 획득에 대한 설명 보여주기
+            if (ActivityCompat.shouldShowRequestPermissionRationale(MainMapActivity.this,
+                    Manifest.permission.ACCESS_FINE_LOCATION)) {
+
+                // 사용자에게 권한 획득에 대한 설명을 보여준 후 권한 요청을 수행
+
+            } else {
+
+                // 권한 획득의 필요성을 설명할 필요가 없을 때는 아래 코드를
+                //수행해서 권한 획득 여부를 요청한다.
+
+                ActivityCompat.requestPermissions(MainMapActivity.this,
+                        PERMISSIONS_STORAGE,
+                        MY_PERMISSIONS_REQUEST_READ_CONTACTS);
+
+            }
+        }
+
+
+
+
+
+
+
 
 
 
@@ -96,6 +120,65 @@ public class MainMapActivity extends FragmentActivity implements MapView.OpenAPI
 
         } else {
             return true;
+        }
+    }
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           String permissions[], int[] grantResults) {
+        switch (requestCode) {
+            case MY_PERMISSIONS_REQUEST_READ_CONTACTS: {
+                //권한 획득이 거부되면 결과 배열은 비어있게 됨
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+                    //권한 획득이 허용되면 수행해야 할 작업이 표시됨
+                    //일반적으로 작업을 처리할 메서드를 호출
+                    if(gps == null) {
+                        gps = new GpsInfo(MainMapActivity.this);
+                    }else{
+                        gps.Update();
+                    }
+
+                    // check if GPS enabled
+                    if(gps.canGetLocation()){
+
+                        double latitude = gps.getLatitude();
+                        double longitude = gps.getLongitude();
+                        //다음이 제공하는 MapView객체 생성 및 API Key 설정
+                        final MapView mapView = new MapView(this);
+                        mapView.setDaumMapApiKey("162e50dd06bf165275d1555f498baf29");
+//        mapView.setOpenAPIKeyAuthenticationResultListener((MapView.OpenAPIKeyAuthenticationResultListener) this);
+//        mapView.setMapViewEventListener((MapViewEventListener) this);
+//        mapView.setPOIItemEventListener((MapView.POIItemEventListener) this);
+                        //xml에 선언된 map_view 레이아웃을 찾아온 후, 생성한 MapView객체 추가
+                        RelativeLayout container = (RelativeLayout) findViewById(R.id.map_view);
+                        container.addView(mapView);
+                        Log.e("띄움", "맵뷰를");
+
+                        MapPOIItem marker = new MapPOIItem();
+                        marker.setItemName("Default Marker");
+                        marker.setTag(0);
+                        marker.setMapPoint(MapPoint.mapPointWithGeoCoord(latitude, longitude));
+                        marker.setMarkerType(MapPOIItem.MarkerType.BluePin); // 기본으로 제공하는 BluePin 마커 모양.
+                        marker.setSelectedMarkerType(MapPOIItem.MarkerType.RedPin); // 마커를 클릭했을때, 기본으로 제공하는 RedPin 마커 모양.
+
+                        mapView.addPOIItem(marker);
+
+                        // \n is for new line
+                        Toast.makeText(getApplicationContext(), "Your Location is - \nLat: " + latitude + "\nLong: " + longitude, Toast.LENGTH_LONG).show();
+                    }else{
+                        // can't get location
+                        // GPS or Network is not enabled
+                        // Ask user to enable GPS/network in settings
+                        chkGpsService();
+                    }
+
+                } else {
+
+                    Toast.makeText(MainMapActivity.this, "권한을 설정해주셔야 사용이 가능합니다.",Toast.LENGTH_LONG).show();
+                }
+                return;
+            }
         }
     }
 
