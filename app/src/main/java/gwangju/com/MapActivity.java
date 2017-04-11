@@ -1,5 +1,6 @@
 package gwangju.com;
 
+import android.Manifest;
 import android.content.Intent;
 import android.os.StrictMode;
 import android.support.v4.app.FragmentActivity;
@@ -20,11 +21,18 @@ import gwangju.com.item.RoomsXMLItem;
 public class MapActivity extends FragmentActivity implements MapView.OpenAPIKeyAuthenticationResultListener, MapView.MapViewEventListener,MapView.POIItemEventListener {
     RoomsXMLItem item;
     List<RoomsXMLItem> list;
+
+    GpsInfo gps = null;
+    private static final int MY_PERMISSIONS_REQUEST_READ_CONTACTS = 1;
+    private static String[] PERMISSIONS_STORAGE = {
+            Manifest.permission.ACCESS_FINE_LOCATION,
+            Manifest.permission.INTERNET
+    };
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map);
-        Log.e("넘어옴", "숙소맵뷰로");
+               Log.e("넘어옴", "숙소맵뷰로");
 
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
