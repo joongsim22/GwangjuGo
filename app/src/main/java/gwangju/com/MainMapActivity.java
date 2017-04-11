@@ -209,7 +209,7 @@ public class MainMapActivity extends FragmentActivity implements MapView.OpenAPI
                     Double.parseDouble(list.get(i).getLon())));
             customMarker.setMarkerType(MapPOIItem.MarkerType.CustomImage);
             // 마커타입을 커스텀마커 지정.
-            customMarker.setCustomImageResourceId(R.drawable.roomsicon); // 마커이미지.
+            customMarker.setCustomImageResourceId(R.drawable.room2); // 마커이미지.
             customMarker.setCustomImageAutoscale(false);
             // hdpi, xhdpi 등 안드로이드 플랫폼의 스케일을 사용할 경우 지도 라이브러리의 스케일 기능을 꺼줌.
             mapView.addPOIItem(customMarker);
