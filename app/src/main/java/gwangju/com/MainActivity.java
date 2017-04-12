@@ -41,6 +41,8 @@ public class MainActivity extends AppCompatActivity {
         roadBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, RoadSelectActivity.class);
+                startActivity(intent);
 
             }
         });
