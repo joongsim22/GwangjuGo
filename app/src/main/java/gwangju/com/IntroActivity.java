@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.WindowManager;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
@@ -17,15 +18,8 @@ public class IntroActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_intro);
 
-        ActionBar actionBar  =getActionBar();
-        ImageView intro = (ImageView)findViewById(R.id.intro);
-        ImageView logo = (ImageView)findViewById(R.id.logo);
-
-        Glide.with(IntroActivity.this).load(R.drawable.introimg).asGif().diskCacheStrategy(DiskCacheStrategy.SOURCE).into(intro);
-
         h = new Handler();
         h.postDelayed(mrun,3000);
-
     }
     Runnable mrun = new Runnable() {
         @Override

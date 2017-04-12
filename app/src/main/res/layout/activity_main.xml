@@ -9,12 +9,17 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="@drawable/intro"
     tools:context="gwangju.com.MainActivity">
 
-    <TextView
+    <ImageView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1" />
+        android:layout_height="0dp"
+        android:src="@drawable/logo"
+        android:scaleType="fitCenter"
+        android:paddingTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_weight="2" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -30,19 +35,27 @@
 
             <Button
                 android:id="@+id/mainBtn1"
-                android:layout_margin="15px"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
+                android:layout_margin="15px"
                 android:layout_weight="1"
-                android:text="테마별 관광지" />
+                android:text="오매광주 여행길" />
 
             <Button
                 android:id="@+id/mainBtn2"
-                android:layout_margin="15px"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
+                android:layout_margin="15px"
                 android:layout_weight="1"
-                android:text="관공서 추천 관광지" />
+                android:text="구별로 여행길" />
+
+            <Button
+                android:id="@+id/mainBtn3"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_margin="15px"
+                android:layout_weight="1"
+                android:text="길따라 여행길" />
         </LinearLayout>
 
         <LinearLayout
@@ -52,40 +65,36 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/mainBtn3"
-                android:layout_margin="15px"
+                android:id="@+id/mainBtn4"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
+                android:layout_margin="15px"
                 android:layout_weight="1"
                 android:text="숙소 정보" />
 
             <Button
-                android:id="@+id/mainBtn4"
-                android:layout_margin="15px"
+                android:id="@+id/mainBtn5"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
+                android:layout_margin="15px"
+                android:layout_weight="1"
+                android:text="축제 달력" />
+
+            <Button
+                android:id="@+id/mainBtn6"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_margin="15px"
                 android:layout_weight="1"
                 android:text="지도로 보기" />
         </LinearLayout>
     </LinearLayout>
 
-    <LinearLayout
-        android:orientation="horizontal"
+    <TextView
+        android:textColor="#ffffff"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:gravity="center">
-        <Button
-            android:id="@+id/calendar"
-            android:layout_weight="1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="축제 달력"/>
-        <Button
-            android:id="@+id/introduce"
-            android:layout_weight="1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="광주 소개"/>
-    </LinearLayout>
+        android:layout_weight="0.2"
+        android:text="광주시에서 제공하는 공공데이터를 이용한 앱입니다."
+        android:gravity="bottom|center"/>
 </LinearLayout>

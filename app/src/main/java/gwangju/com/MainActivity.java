@@ -15,12 +15,14 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         // 메인버튼 4개. 클릭 시 각각 안내페이지로
-        Button themeBtn = (Button) findViewById(R.id.mainBtn1);
+        Button omeBtn = (Button) findViewById(R.id.mainBtn1);
         Button zoneBtn = (Button) findViewById(R.id.mainBtn2);
-        Button roomsBtn = (Button) findViewById(R.id.mainBtn3);
-        Button mapBtn = (Button) findViewById(R.id.mainBtn4);
+        Button roadBtn = (Button) findViewById(R.id.mainBtn3);
+        Button roomsBtn = (Button) findViewById(R.id.mainBtn4);
+        Button calBtn = (Button) findViewById(R.id.mainBtn5);
+        Button mapBtn = (Button) findViewById(R.id.mainBtn6);
 
-        themeBtn.setOnClickListener(new View.OnClickListener() {
+        omeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, ThemeSelectActivity.class);
@@ -36,11 +38,27 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        roadBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+
         roomsBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, RoomsSelectActivity.class);
                 Log.e("넘어간드아아아아아아아","숙소로 넘어간드아아아아아");
+                startActivity(intent);
+            }
+        });
+
+        // 달력 보기
+        calBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, CalendarActivity.class);
                 startActivity(intent);
             }
         });
@@ -53,24 +71,5 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        // 달력 보기
-        Button calBtn = (Button)findViewById(R.id.calendar);
-        calBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, CalendarActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        // 광주 소개하기
-        Button introduceBtn = (Button)findViewById(R.id.introduce);
-        introduceBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, IntroduceGwangjuActivity.class);
-                startActivity(intent);
-            }
-        });
     }
 }

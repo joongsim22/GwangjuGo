@@ -30,8 +30,6 @@ public class RoomsSelectActivity extends AppCompatActivity {
 
         roomsList = (ListView)findViewById(R.id.roomsListView);
         roomsList.setAdapter(adapter);
-//        RoomsData room = new RoomsData();
-//        list = room.getAllinfo();
         RoomsXML item = new RoomsXML();
         list = item.getData();
 
