@@ -182,7 +182,7 @@ public class SelectedRoadActivity extends FragmentActivity implements MapView.Op
         mapView.setMapCenterPointAndZoomLevel(MapPoint.mapPointWithGeoCoord(latitude, longitude), 4, true);
         //숙박 아이콘 찍기
         OmeGwangjuRoadRouteData dao = new OmeGwangjuRoadRouteData();
-        list = dao.getAllRoadRouteinfo(1,1);
+        list = dao.getAllRoadRouteinfo();
         for(int i =0; i<list.size(); i++){
             MapPOIItem customMarker = new MapPOIItem();
             customMarker.setItemName(list.get(i).getTourName());
