@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import gwangju.com.R;
 import gwangju.com.data.dto.OmeGwangjuRoadDetailDto;
 import gwangju.com.data.dto.OmeGwangjuRoadDto;
+import gwangju.com.data.dto.OmeGwangjuRoadTotalDto;
 import gwangju.com.item.RoomsListViewItem;
 
 /**
@@ -21,6 +22,7 @@ import gwangju.com.item.RoomsListViewItem;
 public class RoadListViewAdapter extends BaseAdapter{
         // Adapter에 추가된 데이터를 저장하기 위한 ArrayList
         private ArrayList<OmeGwangjuRoadDto> listViewItemList = new ArrayList<OmeGwangjuRoadDto>() ;
+//        private ArrayList<OmeGwangjuRoadTotalDto> listViewItemList = new ArrayList<OmeGwangjuRoadTotalDto>() ;
     TextView fee;
         // ListViewAdapter의 생성자
         public RoadListViewAdapter() {

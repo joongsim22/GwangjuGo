@@ -16,10 +16,10 @@ import gwangju.com.adapter.RoadListViewAdapter;
 import gwangju.com.data.dao.OmeGwangjuRoadData;
 import gwangju.com.data.dto.OmeGwangjuRoadDetailDto;
 import gwangju.com.data.dto.OmeGwangjuRoadDto;
+import gwangju.com.data.dto.OmeGwangjuRoadTotalDto;
 
 public class RoadSelectActivity extends AppCompatActivity {
     List<OmeGwangjuRoadDto> list;
-    List<OmeGwangjuRoadDetailDto> list2;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,9 +33,13 @@ public class RoadSelectActivity extends AppCompatActivity {
 
         roadList =(ListView)findViewById(R.id.listview1);
         roadList.setAdapter(adapter);
+
         OmeGwangjuRoadData dao = new OmeGwangjuRoadData();
+
         list = dao.getAllRoadinfo();
         adapter.addItem_Nofee("5.18 올레");
+
+
         for(int i =0; i<list.size()-1; i++){
             adapter.addItem(list.get(i).getTourName(),list.get(i).getFee());
 //            if(i==3){
@@ -49,10 +53,6 @@ public class RoadSelectActivity extends AppCompatActivity {
         roadList.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             @Override
             public void onItemClick(AdapterView parent, View v, int position, long id) {
-                String title = parent.getAdapter().getItem(0).toString();
-                Intent intent = new Intent(RoadSelectActivity.this, SelectedRoadActivity.class);
-                intent.putExtra("Roadtitle", title);
-                startActivity(intent);
 
 
             }
