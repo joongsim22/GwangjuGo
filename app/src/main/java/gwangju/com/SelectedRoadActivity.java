@@ -6,6 +6,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.StrictMode;
 import android.support.v4.app.ActivityCompat;
@@ -18,16 +19,21 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import net.daum.mf.map.api.CameraUpdateFactory;
 import net.daum.mf.map.api.MapPOIItem;
 import net.daum.mf.map.api.MapPoint;
+import net.daum.mf.map.api.MapPointBounds;
+import net.daum.mf.map.api.MapPolyline;
 import net.daum.mf.map.api.MapView;
 
 import java.util.List;
 
 import gwangju.com.data.GpsInfo;
+import gwangju.com.data.dao.OmeGwangjuRoadData;
 import gwangju.com.data.dao.OmeGwangjuRoadRouteData;
 import gwangju.com.data.dto.OmeGwangjuRoadDetailDto;
 import gwangju.com.data.dto.OmeGwangjuRoadDto;
+import gwangju.com.data.dto.OmeGwangjuRoadTotalDto;
 
 public class SelectedRoadActivity extends FragmentActivity implements MapView.OpenAPIKeyAuthenticationResultListener, MapView.MapViewEventListener,MapView.POIItemEventListener{
     List<OmeGwangjuRoadDetailDto> list;
@@ -174,6 +180,23 @@ public class SelectedRoadActivity extends FragmentActivity implements MapView.Op
         MapPoint mapPoint = MapPoint.mapPointWithGeoCoord(latitude, longitude);
         mapView.setZoomLevel(7, true);
         mapView.setMapCenterPointAndZoomLevel(MapPoint.mapPointWithGeoCoord(latitude, longitude), 4, true);
+        //숙박 아이콘 찍기
+        OmeGwangjuRoadRouteData dao = new OmeGwangjuRoadRouteData();
+        list = dao.getAllRoadRouteinfo(1,1);
+        for(int i =0; i<list.size(); i++){
+            MapPOIItem customMarker = new MapPOIItem();
+            customMarker.setItemName(list.get(i).getTourName());
+            customMarker.setTag(i);
+            customMarker.setMapPoint(MapPoint.mapPointWithGeoCoord(
+                    Double.parseDouble(list.get(i).getLat()),
+                    Double.parseDouble(list.get(i).getLng())));
+            customMarker.setMarkerType(MapPOIItem.MarkerType.CustomImage);
+            // 마커타입을 커스텀마커 지정.
+            customMarker.setCustomImageResourceId(R.drawable.location2); // 마커이미지.
+            customMarker.setCustomImageAutoscale(false);
+            // hdpi, xhdpi 등 안드로이드 플랫폼의 스케일을 사용할 경우 지도 라이브러리의 스케일 기능을 꺼줌.
+            mapView.addPOIItem(customMarker);
+        }
     }
 
     @Override

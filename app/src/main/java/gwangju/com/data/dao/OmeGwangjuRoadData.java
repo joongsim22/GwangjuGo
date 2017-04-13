@@ -150,6 +150,50 @@ public class OmeGwangjuRoadData {
 
         return list;
     }
+    public List<OmeGwangjuRoadTotalDto> getRoadMaininfo(){
+        ArrayList<OmeGwangjuRoadTotalDto> list = new ArrayList<>();
+
+        //네트워크 연결 - 나중에 출시시에는 thread로 바꾸어줌
+        //주소호출
+        String json = Util.request("http://ayj1002.cafe24.com/OmeGwangjuRoadTotal.jsp?num=1");
+
+        try {
+            JSONArray obj = new JSONArray(json);
+            for (int i = 0; i < obj.length(); i++) {
+                JSONObject obj2 = obj.getJSONObject(i);
+                String ex = obj2.getString("ex1");
+                String fee = obj2.getString("fee");
+                int roadnum = obj2.getInt("roadNum");
+                int kindnum = obj2.getInt("kindNum");
+                String tourname = obj2.getString("tourname");
+                int subkindnum = obj2.getInt("subKindNum");
+                String info = obj2.getString("info");
+                String subname = obj2.getString("subname");
+                String lat = obj2.getString("lat");
+                String lng = obj2.getString("lng");
+
+            OmeGwangjuRoadTotalDto dto = new OmeGwangjuRoadTotalDto();
+                dto.setEx1(ex);
+                dto.setFee(fee);
+                dto.setRoadNum(roadnum);
+                dto.setKindNum(kindnum);
+                dto.setTourname(tourname);
+                dto.setSubKindNum(subkindnum);
+                dto.setInfo(info);
+                dto.setSubname(subname);
+                dto.setLat(lat);
+                dto.setLng(lng);
+
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+            e.getLocalizedMessage();
+            e.getMessage();
+        }
+
+
+        return list;
+    }
 
 
 
