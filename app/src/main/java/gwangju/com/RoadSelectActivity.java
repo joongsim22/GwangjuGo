@@ -2,6 +2,7 @@ package gwangju.com;
 
 import android.content.Intent;
 import android.os.StrictMode;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -13,6 +14,7 @@ import android.widget.ListView;
 import java.util.List;
 
 import gwangju.com.adapter.RoadListViewAdapter;
+import gwangju.com.adapter.ThemeViewPagerAdapter;
 import gwangju.com.data.dao.OmeGwangjuRoadData;
 import gwangju.com.data.dto.OmeGwangjuRoadDetailDto;
 import gwangju.com.data.dto.OmeGwangjuRoadDto;
@@ -20,6 +22,7 @@ import gwangju.com.data.dto.OmeGwangjuRoadTotalDto;
 
 public class RoadSelectActivity extends AppCompatActivity {
     List<OmeGwangjuRoadDto> list;
+    ViewPager themePager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,9 +56,18 @@ public class RoadSelectActivity extends AppCompatActivity {
         roadList.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             @Override
             public void onItemClick(AdapterView parent, View v, int position, long id) {
+                OmeGwangjuRoadDto item = (OmeGwangjuRoadDto)adapter.getItem(position);
 
+                Intent intent = new Intent(RoadSelectActivity.this, SelectedRoadActivity.class);
+                intent.putExtra("item",item);
+                startActivity(intent);
 
             }
         });
+        // 사진 뷰페이저
+        int imgCnt = 2;
+        themePager = (ViewPager)findViewById(R.id.themePager);
+        ThemeViewPagerAdapter themeAdapter = new ThemeViewPagerAdapter(getLayoutInflater(), imgCnt);
+        themePager.setAdapter(themeAdapter);
     }
 }

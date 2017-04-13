@@ -27,10 +27,11 @@ import java.util.List;
 import gwangju.com.data.GpsInfo;
 import gwangju.com.data.dao.OmeGwangjuRoadRouteData;
 import gwangju.com.data.dto.OmeGwangjuRoadDetailDto;
+import gwangju.com.data.dto.OmeGwangjuRoadDto;
 
 public class SelectedRoadActivity extends FragmentActivity implements MapView.OpenAPIKeyAuthenticationResultListener, MapView.MapViewEventListener,MapView.POIItemEventListener{
     List<OmeGwangjuRoadDetailDto> list;
-    OmeGwangjuRoadDetailDto item;
+    OmeGwangjuRoadDto item;
     private static final int MY_PERMISSIONS_REQUEST_READ_CONTACTS = 1;
     private static String[] PERMISSIONS_STORAGE = {
             Manifest.permission.ACCESS_FINE_LOCATION,
@@ -42,13 +43,13 @@ public class SelectedRoadActivity extends FragmentActivity implements MapView.Op
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_selected_road);
         Intent intent = getIntent();
+        item= (OmeGwangjuRoadDto)intent.getSerializableExtra("item");
+        setTitle(item.getTourName());
 
 
         ActionBar actionBar = getActionBar();
-        String themeTitle = intent.getExtras().getString("title");
-        setTitle(themeTitle);
         TextView title =(TextView)findViewById(R.id.title);
-        title.setText(themeTitle);
+        title.setText(item.getTourName());
 
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
