@@ -1,17 +1,10 @@
 package gwangju.com.data.dao;
 
-import android.util.Log;
-
-import org.apache.http.params.HttpConnectionParams;
-import org.apache.http.params.HttpParams;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.json.simple.JSONValue;
-import org.json.simple.parser.JSONParser;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import gwangju.com.data.Util;
@@ -23,49 +16,13 @@ import gwangju.com.data.dto.OmeGwangjuRoadDto;
  *
  */
 
-public class OmeGwangjuRoadData {
-    public List<OmeGwangjuRoadDto> getAllRoadinfo(){
-        ArrayList<OmeGwangjuRoadDto> list = new ArrayList<>();
-
-        //네트워크 연결 - 나중에 출시시에는 thread로 바꾸어줌
-        //주소호출
-        String jsonStr= Util.request("http://ayj1002.cafe24.com/OmeGwangjuRoad.jsp");
-
-
-        try {
-            JSONArray jarray = new JSONArray(jsonStr);
-            for(int i=0; i < jarray.length(); i++){
-                JSONObject jObject = jarray.getJSONObject(i);  // JSONObject 추출
-                String tourname = jObject.getString("tourName");
-                String fee = jObject.getString("fee");
-                String ex = jObject.getString("ex");
-
-                OmeGwangjuRoadDto item = new OmeGwangjuRoadDto();
-                item.setTourName(tourname);
-                item.setEx(ex);
-                item.setFee(fee);
-
-
-                list.add(item);
-            }
-
-
-
-
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-
-        return list;
-}
-
-    public List<OmeGwangjuRoadDetailDto> getAllRoadDetailinfo(){
+public class OmeGwangjuRoadRouteData {
+    public List<OmeGwangjuRoadDetailDto> getAllRoadRouteinfo(int roadname, int kindname){
         ArrayList<OmeGwangjuRoadDetailDto> list = new ArrayList<>();
 
         //네트워크 연결 - 나중에 출시시에는 thread로 바꾸어줌
         //주소호출
-        String json = Util.request("http://ayj1002.cafe24.com/OmeGwangjuRoadDetail.jsp");
+        String json = Util.request("http://ayj1002.cafe24.com/OmeGwangjuRoadRoute.jsp?roadname="+roadname+"&kindname="+kindname);
 
         try {
             JSONArray obj = new JSONArray(json);
@@ -82,6 +39,7 @@ public class OmeGwangjuRoadData {
                 String lng = obj2.getString("lng");
 
                 OmeGwangjuRoadDetailDto dto = new OmeGwangjuRoadDetailDto();
+
                 dto.setNum(num);
                 dto.setRoadNum(roadNum);
                 dto.setTourName(tourname);
@@ -97,8 +55,6 @@ public class OmeGwangjuRoadData {
             }
         } catch (JSONException e) {
             e.printStackTrace();
-            e.getLocalizedMessage();
-            e.getMessage();
         }
 
 

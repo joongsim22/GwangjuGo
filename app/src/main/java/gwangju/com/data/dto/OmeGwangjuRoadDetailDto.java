@@ -9,6 +9,7 @@ import java.io.Serializable;
 public class OmeGwangjuRoadDetailDto implements Serializable {
     int num;
     int roadNum;
+    int kindnum;
     String tourName;
     int subKindNum;
     String ex;
@@ -16,6 +17,14 @@ public class OmeGwangjuRoadDetailDto implements Serializable {
     String subname;
     String lat;
     String lng;
+
+    public int getKindnum() {
+        return kindnum;
+    }
+
+    public void setKindnum(int kindnum) {
+        this.kindnum = kindnum;
+    }
 
     public int getSubKindNum() {
         return subKindNum;

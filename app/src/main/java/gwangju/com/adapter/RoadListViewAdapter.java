@@ -10,6 +10,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import gwangju.com.R;
+import gwangju.com.data.dto.OmeGwangjuRoadDetailDto;
 import gwangju.com.data.dto.OmeGwangjuRoadDto;
 import gwangju.com.item.RoomsListViewItem;
 
@@ -20,7 +21,7 @@ import gwangju.com.item.RoomsListViewItem;
 public class RoadListViewAdapter extends BaseAdapter{
         // Adapter에 추가된 데이터를 저장하기 위한 ArrayList
         private ArrayList<OmeGwangjuRoadDto> listViewItemList = new ArrayList<OmeGwangjuRoadDto>() ;
-
+    TextView fee;
         // ListViewAdapter의 생성자
         public RoadListViewAdapter() {
 
@@ -46,14 +47,16 @@ public class RoadListViewAdapter extends BaseAdapter{
 
             // 화면에 표시될 View(Layout이 inflate된)으로부터 위젯에 대한 참조 획득
             TextView title = (TextView) convertView.findViewById(R.id.textView1) ;
-            TextView detail = (TextView) convertView.findViewById(R.id.textView2) ;
+//            TextView detail = (TextView) convertView.findViewById(R.id.textView2) ;
+             fee= (TextView) convertView.findViewById(R.id.textView2) ;
 
             // Data Set(listViewItemList)에서 position에 위치한 데이터 참조 획득
             OmeGwangjuRoadDto listViewItem = listViewItemList.get(position);
 
             // 아이템 내 각 위젯에 데이터 반영
             title.setText(listViewItem.getTourName());
-            detail.setText(listViewItem.getEx());
+//            detail.setText(listViewItem.getEx());
+            fee.setText(listViewItem.getFee());
 
             return convertView;
         }
@@ -72,14 +75,24 @@ public class RoadListViewAdapter extends BaseAdapter{
         }
 
         // 아이템 데이터 추가를 위한 함수. 개발자가 원하는대로 작성 가능.
-        public void addItem(String title, String desc) {
+        public void addItem(String title, String fee) {
             OmeGwangjuRoadDto item = new OmeGwangjuRoadDto();
 
             item.setTourName(title);
-            item.setEx(desc);
+            item.setFee(fee);
 
             listViewItemList.add(item);
         }
+        public void addItem_Nofee(String title) {
+
+            OmeGwangjuRoadDto item = new OmeGwangjuRoadDto();
+
+
+            item.setTourName(title);
+
+            listViewItemList.add(item);
+        }
+
     }
 
 
