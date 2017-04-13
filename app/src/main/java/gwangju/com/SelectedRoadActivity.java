@@ -180,23 +180,25 @@ public class SelectedRoadActivity extends FragmentActivity implements MapView.Op
         MapPoint mapPoint = MapPoint.mapPointWithGeoCoord(latitude, longitude);
         mapView.setZoomLevel(7, true);
         mapView.setMapCenterPointAndZoomLevel(MapPoint.mapPointWithGeoCoord(latitude, longitude), 4, true);
-        //숙박 아이콘 찍기
+        // 아이콘 찍기
         OmeGwangjuRoadRouteData dao = new OmeGwangjuRoadRouteData();
         list = dao.getAllRoadRouteinfo();
+        MapPolyline polyline = new MapPolyline();
         for(int i =0; i<list.size(); i++){
-            MapPOIItem customMarker = new MapPOIItem();
-            customMarker.setItemName(list.get(i).getTourName());
-            customMarker.setTag(i);
-            customMarker.setMapPoint(MapPoint.mapPointWithGeoCoord(
-                    Double.parseDouble(list.get(i).getLat()),
-                    Double.parseDouble(list.get(i).getLng())));
-            customMarker.setMarkerType(MapPOIItem.MarkerType.CustomImage);
-            // 마커타입을 커스텀마커 지정.
-            customMarker.setCustomImageResourceId(R.drawable.location2); // 마커이미지.
-            customMarker.setCustomImageAutoscale(false);
-            // hdpi, xhdpi 등 안드로이드 플랫폼의 스케일을 사용할 경우 지도 라이브러리의 스케일 기능을 꺼줌.
-            mapView.addPOIItem(customMarker);
+            polyline.setTag(1000);
+            polyline.setLineColor(Color.argb(128, 255, 51, 0)); // Polyline 컬러 지정.
+
+// Polyline 좌표 지정.
+            polyline.addPoint(MapPoint.mapPointWithGeoCoord(Double.parseDouble(list.get(i).getLat()),Double.parseDouble(list.get(i).getLng())));
+
+// Polyline 지도에 올리기.
+            mapView.addPolyline(polyline);
+
         }
+// 지도뷰의 중심좌표와 줌레벨을 Polyline이 모두 나오도록 조정.
+        MapPointBounds mapPointBounds = new MapPointBounds(polyline.getMapPoints());
+        int padding = 100; // px
+        mapView.moveCamera(CameraUpdateFactory.newMapPointBounds(mapPointBounds, padding));
     }
 
     @Override

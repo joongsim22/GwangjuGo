@@ -22,7 +22,7 @@ public class OmeGwangjuRoadRouteData {
 
         //네트워크 연결 - 나중에 출시시에는 thread로 바꾸어줌
         //주소호출
-        String json = Util.request("http://ayj1002.cafe24.com/OmeGwangjuRoadRoute.jsp?roadnum=1&kindnum=1");
+        String json = Util.request("http://ayj1002.cafe24.com/OmeGwangjuRoadDetailRoute.jsp?roadnum=1&kindnum=1");
 
         try {
             JSONArray obj = new JSONArray(json);
@@ -31,7 +31,7 @@ public class OmeGwangjuRoadRouteData {
                 int num = obj2.getInt("num");
                 int kindnum = obj2.getInt("kindNum");
                 int roadNum = obj2.getInt("roadNum");
-                String tourname= obj2.getString("tourName");
+                String tourname= obj2.getString("tourname");
                 int subKindNum = obj2.getInt("subKindNum");
                 String ex= obj2.getString("ex");
                 String info = obj2.getString("info");
