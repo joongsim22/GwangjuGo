@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="rooms">
+        <item >종류</item>
+        <item >중저가숙박시설</item>
+        <item >크린호텔</item>
+        <item >관광호텔</item>
+        <item >클린숙박시설</item>
+        <item >기타</item>
+        <item >굿스테이인증업소</item>
+        <item >외국인도시민박업</item>
+        <item >미입력</item>
+    </string-array>
+
+</resources>

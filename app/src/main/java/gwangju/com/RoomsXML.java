@@ -66,8 +66,6 @@ public class RoomsXML {
                 } else if (eventType == XmlPullParser.END_TAG) {
                     tagName = xpp.getName();
                     if (tagName.equals("item")) {
-                        Log.e("들어가는 이름",title);
-                        Log.e("들어가는 종류",lodgName);
                         RoomsXMLItem item = new RoomsXMLItem();
                         item.setLodgName(lodgName);
                         item.setTitle(title);

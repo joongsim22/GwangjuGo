@@ -38,6 +38,7 @@ import gwangju.com.data.dto.OmeGwangjuRoadTotalDto;
 public class SelectedRoadActivity extends FragmentActivity implements MapView.OpenAPIKeyAuthenticationResultListener, MapView.MapViewEventListener,MapView.POIItemEventListener{
     List<OmeGwangjuRoadDetailDto> list;
     OmeGwangjuRoadDto item;
+
     private static final int MY_PERMISSIONS_REQUEST_READ_CONTACTS = 1;
     private static String[] PERMISSIONS_STORAGE = {
             Manifest.permission.ACCESS_FINE_LOCATION,

@@ -106,12 +106,12 @@ public class OmeGwangjuRoadData {
 
         return list;
     }
-    public List<OmeGwangjuRoadTotalDto> getRoadtotalinfo(){
+    public List<OmeGwangjuRoadTotalDto> getRoadtotalinfo(int num){
         ArrayList<OmeGwangjuRoadTotalDto> list = new ArrayList<>();
 
         //네트워크 연결 - 나중에 출시시에는 thread로 바꾸어줌
         //주소호출
-        String json = Util.request("http://ayj1002.cafe24.com/OmeGwangjuRoadTotal.jsp");
+        String json = Util.request("http://ayj1002.cafe24.com/OmeGwangjuRoadTotal.jsp?num="+num);
 
         try {
             JSONArray obj = new JSONArray(json);
